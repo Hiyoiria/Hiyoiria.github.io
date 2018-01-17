@@ -3,6 +3,80 @@
   
     
     <entry>
+      <title><![CDATA[组合计数相关]]></title>
+      <url>/posts/title.html</url>
+      <content type="html"><![CDATA[<p>###基础计数</p>
+<p>####盒子与球</p>
+<p>默认以下盒子为m 球为n</p>
+<ol>
+<li>盒子不同 球相同<ul>
+<li>不能为空 直接插板-&gt;C(n-1,m-1)<ul>
+<li>可以有空 加入m个球使得变为上面问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>盒子相同 球不同<ul>
+<li>不能有空 相当于划分集合 方案不同当且仅当有一个集合的元素不同 那么就是<a href="#jump">第二类斯特林数</a></li>
+<li>可以有空 则枚举空的数量(无序)</li>
+</ul>
+</li>
+<li><p>盒子相同 球也相同</p>
+<ul>
+<li>这就是个<a href="#skip">数的划分</a></li>
+</ul>
+<p><span id="skip"> </span></p>
+</li>
+</ol>
+<p>####数的划分</p>
+<p>往往是一类集合无序球也无差别的问题</p>
+<ol>
+<li>n划分成k个数(f[n][k])<ul>
+<li>就是k个<pre><code>- 使得**最后结果**每个位置都&gt;=2 则先提出k个来放到每一个位置f[n-k][k]
+- 有为1的位置 则保证它存在f[n-1][k-1]
+</code></pre></li>
+<li>不超过k个(可以有0)<pre><code>- 上述第二种变为f[n][k-1] 就相当于放了个0堆
+</code></pre></li>
+</ul>
+</li>
+<li><p>n划分成不大于k的数f[n][k]</p>
+<ul>
+<li>可以有重 <pre><code>- 每个数都&lt;k f[n][k-1]
+- 有数为k f[n-m][m]
+</code></pre></li>
+<li>每个数不同<pre><code>- 有数为k 使得之前的数不能为k -&gt; f[n-m][m-1]
+</code></pre></li>
+</ul>
+<p><span id="jump"> </span></p>
+</li>
+</ol>
+<p>####第二类斯特林数</p>
+<p>n个有差别元素划分为m个无序集合</p>
+<ol>
+<li>求法<ul>
+<li>递推式 (n^2)<ul>
+<li>第i个元素放一个新的集合 s[i-1][j-1]</li>
+<li>第i个元素放入已有集合 s[i-1][j]*j<ul>
+<li>通项式求一行(FFT -&gt; nlogn)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>要记的应用<br> 转换下降幂与自然幂     [图片上传失败…(image-bdb879-1516201501883)]<br> n的k次下降幂是n<em>(n-1)</em>(n-2)<em>…</em>(n-k-1)<br> 有个小性质 n(k+1)=n(k)<em>(n-k)<br>那么实际上 i^k 就是 sigma(S(k,j)</em>j!*C(i,j))后面那一坨就是下降幂</li>
+</ol>
+<p>####错排</p>
+<p>每个位置都不是原本的数的方案数</p>
+<ul>
+<li>两种递推形式<br>$$f[i]=(i-1)<em>(f[i-1]+f[i-2])  f[i]=f[i-1]</em>i<em>(-1)^i$$<br>一种非递推(也是O(n)不知道有什么意义的形式) $$f[i]=sum{(-1)^i</em>n!/i!}$$</li>
+</ul>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Daily]]></title>
       <url>/posts/title.html</url>
       <content type="html"><![CDATA[<p>人总是健忘 所以总是需要记录<br>记下OI日子里的那些错误或是技巧 也算是给自己一个交代吧</p>
